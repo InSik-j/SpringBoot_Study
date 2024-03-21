@@ -1,6 +1,7 @@
 package com.in28minutes.springboot.learnjpaandhibernate.course.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,10 +19,17 @@ public class CourseJdbcRepository {
 				insert into course(id, name, author)
 				values(?, ?, ?);
 			""";
-	private static String Delete_QUERY =
+	private static String DELETE_QUERY =
 			
 			"""
 				delete from course
+				where id = ?
+			""";
+	
+	private static String SELECT_QUERY =
+			
+			"""
+				select * from course
 				where id = ?
 			""";
 	
@@ -30,6 +38,13 @@ public class CourseJdbcRepository {
 	}
 	
 	public void deleteById(long id) {
-		springJdbcTemplate.update(Delete_QUERY, id);
+		springJdbcTemplate.update(DELETE_QUERY, id);
+	}
+	
+	public Course findById(long id) {
+		
+		// ResultSet을 Bean에 매핑 -> id도 입력값으로 전송  : Row Mapper
+		return springJdbcTemplate.queryForObject(SELECT_QUERY, new BeanPropertyRowMapper<>(Course.class), id);
+		
 	}
 }

@@ -17,6 +17,19 @@ public class Course {
 		this.author = author;
 	}
 	
+	// Setters
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	// Getters
 	public long getId() {
 		return id;
