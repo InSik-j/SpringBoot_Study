@@ -2,10 +2,21 @@ package com.in28minutes.springboot.myfirstwebapp.todo;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+
+// @Entity : Bean을 DB 테이블에 매핑할 수 있게 해줌
+
+@Entity
 public class Todo {
+	
+	@Id
+	@GeneratedValue
 	private int id;
+	
 	private String username;
 	
 	@Size(min=10, message="Enter atleast 10 Characters")
@@ -22,7 +33,7 @@ public class Todo {
 		this.targetDate = targetDate;
 		this.done = done;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
