@@ -2,7 +2,7 @@
 <%@ include file="common/navigation.jspf" %>
 	
 <div class="container">
-	<h1>Welecome to in28minutes</h1>
+	<h1>Welecome to ${name }</h1>
 	<a href="list-todos">Manage</a> Your todos
 </div>
 	
