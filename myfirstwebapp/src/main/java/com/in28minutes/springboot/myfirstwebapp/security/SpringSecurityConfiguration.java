@@ -52,12 +52,17 @@ public class SpringSecurityConfiguration {
 	// H2 콘솔에 액세스하려면 CSRF(사이트 간 요청 위조) 비활성화
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//		http.authorizeHttpRequests(
+//				auth -> auth.anyRequest().authenticated());
+//		http.formLogin(withDefaults());
+//		
+//		http.csrf().disable();
+//		http.headers().frameOptions().disable();
+//		return http.build();
 		http.authorizeHttpRequests(
-				auth -> auth.anyRequest().authenticated());
-		http.formLogin(withDefaults());
-		
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+				authorize -> authorize.anyRequest().authenticated()).formLogin(withDefaults())
+																	.csrf(csrf->csrf.disable())
+																	.headers(headers-> headers.frameOptions(options->options.disable()));
 		return http.build();
 	}
 }
